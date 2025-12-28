@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pro Cricket Match Tips</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+    body{
+      background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+      color:#fff;
+      min-height:100vh;
+    }
+    header{
+      padding:20px;
+      text-align:center;
+      background:rgba(0,0,0,0.4);
+      backdrop-filter:blur(6px);
+    }
+    header h1{font-size:26px;font-weight:700}
+    header p{opacity:.8}
+
+    .container{max-width:1100px;margin:auto;padding:20px}
+
+    .match-card{
+      background:rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:20px;
+      margin-bottom:20px;
+      box-shadow:0 15px 40px rgba(0,0,0,0.4);
+      animation:fadeIn .8s ease
+    }
+
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+    .match-header{
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:12px;
+    }
+    .teams{font-size:20px;font-weight:600}
+    .venue{font-size:14px;opacity:.8}
+
+    .tips{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:12px;
+      margin-top:15px;
+    }
+
+    .tip{
+      background:rgba(0,0,0,0.35);
+      border-left:4px solid #00ffcc;
+      padding:12px 14px;
+      border-radius:12px;
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    .highlight{color:#00ffcc;font-weight:600}
+
+    .winner{
+      margin-top:15px;
+      background:linear-gradient(90deg,#00ffcc,#00bfa5);
+      color:#002b2b;
+      padding:14px;
+      border-radius:14px;
+      text-align:center;
+      font-size:16px;
+      font-weight:700;
+      animation:pulse 1.8s infinite
+    }
+
+    @keyframes pulse{
+      0%{box-shadow:0 0 0 0 rgba(0,255,204,0.6)}
+      70%{box-shadow:0 0 0 15px rgba(0,255,204,0)}
+      100%{box-shadow:0 0 0 0 rgba(0,255,204,0)}
+    }
+
+    footer{
+      text-align:center;
+      padding:15px;
+      font-size:13px;
+      opacity:.7;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🔥 Pro Cricket Match Tips</h1>
+  <p>Auto generated smart analysis • Live ready</p>
+</header>
+
+<div class="container" id="app"></div>
+
+<footer>
+  © 2025 Aryan Tips • For Analysis Purpose Only
+</footer>
+
+<script>
+// AUTO DATA (future me API / admin panel se aa sakta hai)
+const matchTips = [
+  {
+    teams: "Sydney Thunders vs Melbourne Stars",
+    venue: "Canberra",
+    tips: [
+      "<span class='highlight'>Sam Billings</span> and <span class='highlight'>Bancroft</span> key players today",
+      "Head to Head level – no major advantage",
+      "<span class='highlight'>T Sangha</span> & <span class='highlight'>Swepson</span> effective bowlers",
+      "Sydney Thunders slightly ahead overall",
+      "ST strong while chasing",
+      "If Stars chase → match becomes 50/50",
+      "Average score here: <span class='highlight'>166</span> (last 6 seasons)"
+    ],
+    winner: "📈 Edge with Sydney Thunders"
+  }
+];
+
+const app = document.getElementById("app");
+
+matchTips.forEach(match => {
+  const card = document.createElement("div");
+  card.className = "match-card";
+
+  card.innerHTML = `
+    <div class="match-header">
+      <div class="teams">${match.teams}</div>
+      <div class="venue">📍 ${match.venue}</div>
+    </div>
+
+    <div class="tips">
+      ${match.tips.map(t => `<div class="tip">${t}</div>`).join('')}
+    </div>
+
+    <div class="winner">${match.winner}</div>
+  `;
+
+  app.appendChild(card);
+});
+</script>
+
+</body>
+</html>
