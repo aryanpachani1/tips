@@ -95,6 +95,18 @@
   <p>Auto generated smart analysis • Live ready</p>
 </header>
 
+<div class="container">
+  <div class="match-card">
+    <h2 style="margin-bottom:10px">🔮 Auto Match Predictor</h2>
+    <div class="tips" style="grid-template-columns:1fr 1fr">
+      <input id="teamA" placeholder="Team A (e.g. Sydney Thunders)" style="padding:12px;border-radius:10px;border:none">
+      <input id="teamB" placeholder="Team B (e.g. Melbourne Stars)" style="padding:12px;border-radius:10px;border:none">
+      <input id="stadium" placeholder="Stadium (e.g. Canberra)" style="padding:12px;border-radius:10px;border:none">
+      <button onclick="predict()" style="padding:12px;border-radius:10px;border:none;background:#00ffcc;font-weight:700">Predict Match</button>
+    </div>
+  </div>
+</div>
+
 <div class="container" id="app"></div>
 
 <footer>
@@ -102,23 +114,43 @@
 </footer>
 
 <script>
-// AUTO DATA (future me API / admin panel se aa sakta hai)
-const matchTips = [
-  {
-    teams: "Sydney Thunders vs Melbourne Stars",
-    venue: "Canberra",
-    tips: [
-      "<span class='highlight'>Sam Billings</span> and <span class='highlight'>Bancroft</span> key players today",
-      "Head to Head level – no major advantage",
-      "<span class='highlight'>T Sangha</span> & <span class='highlight'>Swepson</span> effective bowlers",
-      "Sydney Thunders slightly ahead overall",
-      "ST strong while chasing",
-      "If Stars chase → match becomes 50/50",
-      "Average score here: <span class='highlight'>166</span> (last 6 seasons)"
-    ],
-    winner: "📈 Edge with Sydney Thunders"
-  }
-];
+function predict(){
+  const teamA = document.getElementById('teamA').value || 'Team A';
+  const teamB = document.getElementById('teamB').value || 'Team B';
+  const stadium = document.getElementById('stadium').value || 'Neutral Venue';
+
+  const avgScore = Math.floor(150 + Math.random()*30);
+  const chasingAdv = Math.random() > 0.5 ? teamA : teamB;
+  const winner = Math.random() > 0.5 ? teamA : teamB;
+
+  const players = [
+    `${teamA} Key Player: Top Order Batsman`,
+    `${teamB} Key Player: Strike Bowler`,
+    `Pitch supports spinners in middle overs`,
+    `Death overs crucial for result`
+  ];
+
+  app.innerHTML = '';
+
+  const card = document.createElement('div');
+  card.className = 'match-card';
+  card.innerHTML = `
+    <div class="match-header">
+      <div class="teams">${teamA} vs ${teamB}</div>
+      <div class="venue">📍 ${stadium}</div>
+    </div>
+
+    <div class="tips">
+      <div class="tip">Average Score: <span class='highlight'>${avgScore}</span></div>
+      <div class="tip">Chasing Advantage: <span class='highlight'>${chasingAdv}</span></div>
+      ${players.map(p=>`<div class='tip'>${p}</div>`).join('')}
+    </div>
+
+    <div class="winner">🏆 Likely Winner: ${winner}</div>
+  `;
+
+  app.appendChild(card);
+}
 
 const app = document.getElementById("app");
 
